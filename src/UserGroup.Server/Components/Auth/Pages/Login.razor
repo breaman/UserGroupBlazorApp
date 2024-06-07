@@ -1,0 +1,22 @@
+@page "/account/login"
+<h3>Login</h3>
+
+<div class="text-sm text-red-500 px-8" style="@(string.IsNullOrWhiteSpace(errorMessage) ? "display: none" : "display: block")">
+    @errorMessage
+</div>
+<EditForm Model="Dto" method="post" OnSubmit="LoginUser" FormName="login">
+    <FluentValidationValidator @ref="_fluentValidationValidator" DisableAssemblyScanning="true"/>
+    <ValidationSummary class="text-sm text-red-500 px-8" role="alert"/>
+    <div class="inputWrapper">
+        <InputText @bind-Value="Dto.Email" class="peer inputField" autocomplete="username" aria-required="true" placeholder=" "/>
+        <label for="email" class="inputLabel">Email</label>
+    </div>
+    <div class="inputWrapper">
+        <InputText type="password" @bind-Value="Dto.Password" class="peer inputField" autocomplete="current-password" aria-required="true" placeholder=" "/>
+        <label for="password" class="inputLabel">Password</label>
+    </div>
+    <div>
+        <button type="submit" class="bg-teal-500 text-white h-10 px-4 mt-2 rounded-xl">Log in</button>
+        <NavLink href="account/forgotpassword" class="inline-block text-white bg-rose-500 leading-10 h-10 ml-4 px-4 mt-2 rounded-xl">Forgot your password?</NavLink>
+    </div>
+</EditForm>

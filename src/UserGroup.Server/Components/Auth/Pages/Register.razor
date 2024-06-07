@@ -1,0 +1,38 @@
+@page "/account/register"
+<h3>Register</h3>
+
+<div>
+    <div class="pt-2 text-sm text-red-500 px-8" style="@((_identityErrors.Count > 0) ? "display: block" : "display: none")">
+        <ul>
+            @foreach (var errorMessage in _identityErrors)
+            {
+            <li>@errorMessage.Description</li>
+            }
+        </ul>
+    </div>
+    <EditForm Model="Dto" FormName="register" OnValidSubmit="RegisterUser" method="post">
+        <FluentValidationValidator @ref="_fluentValidationValidator" DisableAssemblyScanning="true"/>
+        <ValidationSummary class="text-sm text-red-500 px-8" role="alert"/>
+        <div class="inputWrapper">
+            <InputText @bind-Value="Dto.Email" class="peer inputField" id="email" autocomplete="username" placeholder=" "/>
+            <label for="email" class="inputLabel">Email</label>
+        </div>
+        <div class="inputWrapper">
+            <InputText type="password" @bind-Value="Dto.Password" id="password" class="peer inputField" placeholder=" "/>
+            <label for="password" class="inputLabel">Password</label>
+        </div>
+        <div class="inputWrapper">
+            <InputText type="password" @bind-Value="Dto.ConfirmPassword" id="confirmPassword" class="peer inputField" placeholder=" "/>
+            <label for="confirmPassword" class="inputLabel">Confirm Password</label>
+        </div>
+        <div class="inputWrapper">
+            <InputText @bind-Value="Dto.FirstName" id="firstName" class="peer inputField" placeholder=" "/>
+            <label for="firstName" class="inputLabel">First Name</label>
+        </div>
+        <div class="inputWrapper">
+            <InputText @bind-Value="Dto.LastName" id="lastName" class="peer inputField" placeholder=" "/>
+            <label for="lastName" class="inputLabel">Last Name</label>
+        </div>
+        <button type="submit" class="bg-cyan-500 text-white h-10 px-4 mt-2 rounded-xl">Register</button>
+    </EditForm>
+</div>
